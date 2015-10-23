@@ -12,20 +12,23 @@ public class MainActivity extends Activity {
     private WebView mWebView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        WebView webView =(WebView)findViewById(R.id.webView);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = webView.getSettings();
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        mWebView = new WebView(this);
+        WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl("https://www.google.com");
-    }
+        mWebView.loadUrl("https://www.google.com/");
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
 
+        this.setContentView(mWebView);
+    }
 
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
