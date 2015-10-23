@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -11,21 +12,20 @@ public class MainActivity extends Activity {
     private WebView mWebView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        mWebView = new WebView(this);
-        mWebView.loadUrl("http://www.google.com/");
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-
-        this.setContentView(mWebView);
+        setContentView(R.layout.activity_main);
+        WebView webView =(WebView)findViewById(R.id.webView);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.loadUrl("https://www.google.com");
     }
+
 
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
