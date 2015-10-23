@@ -2,6 +2,7 @@ package com.example.rahulsharma.granth_sas_app;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -16,12 +17,9 @@ import android.webkit.WebViewClient;
 @SuppressLint("JavascriptInterface") public class MainActivity extends Activity {
     /** Called when the activity is first created. */
 
+
     private WebView browser = null;
-
-
-
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
         browser.loadUrl(url);
         return true;
     }
@@ -29,17 +27,9 @@ import android.webkit.WebViewClient;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        // connect to our browser so we can manipulate it
         browser = (WebView) findViewById(R.id.webView);
-
-        // get settings so we can config our WebView instance
         WebSettings settings = browser.getSettings();
-
-        // JavaScript?  Of course!
         settings.setJavaScriptEnabled(true);
-        // clear cache
         browser.clearCache(true);
 
         final ProgressDialog pd=new ProgressDialog(this);
@@ -56,13 +46,10 @@ import android.webkit.WebViewClient;
                 return true;
             }
         });
-        // this is necessary for "alert()" to work
-        browser.setWebChromeClient(new WebChromeClient());
 
-        // add our custom functionality to the javascript environment
+        browser.setWebChromeClient(new WebChromeClient());
         browser.addJavascriptInterface(new MyCoolJSHandler(), "Cloud");
 
-        // load a page to get things started
         pd.show();
         browser.loadUrl("http://schoolv2.inilabs.net/signin/index");
     }
