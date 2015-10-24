@@ -11,9 +11,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-
-
-
 @SuppressLint("JavascriptInterface") public class MainActivity extends Activity {
     /** Called when the activity is first created. */
 
