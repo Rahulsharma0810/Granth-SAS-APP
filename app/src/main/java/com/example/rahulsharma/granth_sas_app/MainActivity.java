@@ -35,6 +35,14 @@ import android.webkit.WebViewClient;
             public void onPageFinished(WebView view, String url) {
                 pd.dismiss();
             }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+
+                view.loadUrl("about:blank");
+            }
+            
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
@@ -86,7 +94,7 @@ import android.webkit.WebViewClient;
 
         // write to LogCat (Error)
         public void Error(String str) {
-            Log.e("GoingNative",str);
+            Log.e("GoingNative", str);
         }
 
         // Kill the app
