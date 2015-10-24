@@ -40,9 +40,9 @@ import android.webkit.WebViewClient;
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
 
-                view.loadUrl("about:blank");
+                view.loadUrl("file:///android_asset/404.html");
             }
-            
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
